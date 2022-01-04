@@ -14,4 +14,3 @@ class TestHistory(unittest.TestCase):
         forecasts = monthly_forecast(44418, 2019, 2)
         self.assertIsInstance(forecasts[0], dict, "Did you correctly concatenate daily forecast lists?")
         self.assertEqual(len(forecasts), 1995)
-

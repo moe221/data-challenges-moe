@@ -1,21 +1,36 @@
 # pylint: disable=missing-docstring
 
 import sys
-import datetime
+import requests
+from calendar import monthrange
+import pandas as pd
 
 from weather import search_city
 
+BASE_URI = "https://www.metaweather.com"
 
 def daily_forecast(woeid, year, month, day):
-    pass  # YOUR CODE HERE
+    response = requests.get(f"{BASE_URI}/api/location/{woeid}/{year}/{month}/{day}/")
+    return response.json()
+
 
 def monthly_forecast(woeid, year, month):
     """ return a `list` of forecasts for the whole month """
-    pass  # YOUR CODE HERE
+    results = []
+    for day in range(1, monthrange(year=year, month=month)[1] + 1):
+        response = requests.get(f"{BASE_URI}/api/location/{woeid}/{year}/{month}/{day}")
+        results.append(response.json())
+
+    results = [item for sublist in results for item in sublist]
+    return results
+
 
 def write_csv(woeid, year, month, city, forecasts):
     """ dump all the forecasts to a CSV file in the `data` folder """
-    pass  # YOUR CODE HERE
+
+    df = pd.DataFrame.from_dict(forecasts)
+    df.to_csv(f"{year}_{month}_{woeid}_{city}.csv")
+
 
 def main():
     if len(sys.argv) > 2:
@@ -40,3 +55,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    #print(monthly_forecast(2487956, 2013, 5))
