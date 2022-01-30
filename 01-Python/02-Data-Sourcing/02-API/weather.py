@@ -1,7 +1,6 @@
 # pylint: disable=missing-module-docstring
 
 import sys
-import urllib.parse
 import requests
 
 BASE_URI = "https://www.metaweather.com"
