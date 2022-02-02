@@ -426,7 +426,7 @@ print(result.check())
 
 ### Optional - Top 10 Countries event wins since 1984
 
-If you are a big fan of the olymics you may have noticed that the medal counts don't look quite right.  Add a new cell into your notebooks and run the following:
+If you are a big fan of the olympics you may have noticed that the medal counts don't look quite right.  Add a new cell into your notebooks and run the following:
 
 ```python
 all_df[(all_df.Year==2008) & (all_df.Event=='Basketball') & (all_df.Medal=='Gold')]
